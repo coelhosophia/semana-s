@@ -1,0 +1,76 @@
+def calcular_perimetro(comprimento, largura):
+    return 2 * (comprimento + largura)
+
+
+def ler_valor(mensagem):
+    while True:
+        try:
+            valor = float(input(mensagem))
+            if valor <= 0:
+                print("⚠️ O valor deve ser maior que zero.")
+            else:
+                return valor
+        except ValueError:
+            print("⚠️ Entrada inválida. Digite um número válido.")
+
+
+def menu():
+    print("\n=== CALCULADORA DE CERCA PARA TERRENO ===")
+    print("1 - Calcular cerca para um terreno")
+    print("2 - Calcular para vários terrenos")
+    print("0 - Sair")
+
+
+def calcular_um():
+    comprimento = ler_valor("Digite o comprimento (m): ")
+    largura = ler_valor("Digite a largura (m): ")
+
+    perimetro = calcular_perimetro(comprimento, largura)
+    area = comprimento * largura
+
+    print(f"\n📏 Perímetro: {perimetro:.2f} m")
+    print(f"🌱 Área: {area:.2f} m²")
+
+
+def calcular_varios():
+    total_cerca = 0
+    total_area = 0
+
+    quantidade = int(ler_valor("Quantos terrenos deseja calcular? "))
+
+    for i in range(quantidade):
+        print(f"\n--- Terreno {i + 1} ---")
+        comprimento = ler_valor("Comprimento (m): ")
+        largura = ler_valor("Largura (m): ")
+
+        perimetro = calcular_perimetro(comprimento, largura)
+        area = comprimento * largura
+
+        total_cerca += perimetro
+        total_area += area
+
+        print(f"Perímetro: {perimetro:.2f} m | Área: {area:.2f} m²")
+
+    print("\n=== RESUMO ===")
+    print(f"Total de cerca necessária: {total_cerca:.2f} m")
+    print(f"Área total: {total_area:.2f} m²")
+
+
+def main():
+    while True:
+        menu()
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            calcular_um()
+        elif opcao == "2":
+            calcular_varios()
+        elif opcao == "0":
+            print("Encerrando o programa...")
+            break
+        else:
+            print("⚠️ Opção inválida.")
+
+
+if __name__ == "__main__":
+    main()
